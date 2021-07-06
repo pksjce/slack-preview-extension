@@ -1,0 +1,19 @@
+{
+  "name": "slack-preview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:lambda": "netlify-lambda serve netlify/functions",
+    "build:lambda": "netlify-lambda build netlify/functions",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "netlify-lambda": "^2.0.10"
+  },
+  "dependencies": {
+    "@slack/web-api": "^6.2.4"
+  }
+}

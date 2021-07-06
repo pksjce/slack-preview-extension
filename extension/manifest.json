@@ -1,0 +1,21 @@
+{
+    "name": "Slack preview",
+    "description": "This is a chrome extension to preview slack messages",
+	"version": "0.2",
+	"manifest_version": 3,
+	"permissions": ["identity", "activeTab", "storage"],
+	"host_permissions": [
+		"*://*/*"
+	  ],
+	"action": {
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"content_scripts": [
+		{
+		  "matches": ["<all_urls>"],
+		  "js": ["contentScript.js"]
+		}
+	  ]
+}

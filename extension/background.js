@@ -5,7 +5,7 @@ const USER_SCOPE_PERMISSIONS = [
   "users:read",
 ];
 const CLIENT_ID = "3012884836.2129586826388";
-const CLIENT_SECRET = "224b3289623721fab1fa849e1c9bd2b7";
+const CLIENT_SECRET = "9ddfbb74d856c301b6088f022e2f6185";
 
 const slackUtils = {
   getOauthUrl: () => {
