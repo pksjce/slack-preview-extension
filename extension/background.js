@@ -2,7 +2,7 @@ const SLACK_OAUTH_AUTHORIZE_URL = "https://slack.com/oauth/v2/authorize";
 const USER_SCOPE_PERMISSIONS = [
   "channels:read",
   "channels:history",
-  "users:read",
+  "users:read"
 ];
 const CLIENT_ID = "3012884836.2129586826388";
 const CLIENT_SECRET = "9ddfbb74d856c301b6088f022e2f6185";
@@ -21,7 +21,7 @@ const slackUtils = {
     const [, code] = codeStr.split("=");
     const slackAccessUrl = `https://slack.com/api/oauth.v2.access?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&redirect_uri=${redirectUrl}&code=${code}`;
     return slackAccessUrl;
-  },
+  }
 };
 
 chrome.runtime.onInstalled.addListener(openTab);
@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener((param, _, sendResponse) => {
     chrome.identity.launchWebAuthFlow(
       {
         url: slackUtils.getOauthUrl(),
-        interactive: true,
+        interactive: true
       },
       (codeUrl) => {
         fetch(slackUtils.getOauthAccessUrl(codeUrl))
@@ -47,6 +47,23 @@ chrome.runtime.onMessage.addListener((param, _, sendResponse) => {
           });
       }
     );
+  }
+  if (param.type === "getconvo") {
+    const url = "http://localhost:9000/.netlify/functions/getSlackConvo/";
+    const { cid, oldest, token } = param;
+    const fullUrl =
+      url +
+      "?token=" +
+      encodeURIComponent(token) +
+      "&cid=" +
+      encodeURIComponent(cid) +
+      "&oldest=" +
+      encodeURIComponent(oldest);
+    fetch(fullUrl)
+      .then((resp) => resp.json())
+      .then((convo) => {
+        sendResponse(convo);
+      });
   }
   return true;
 });
